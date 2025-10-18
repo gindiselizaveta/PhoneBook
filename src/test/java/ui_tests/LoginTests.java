@@ -17,7 +17,7 @@ public class LoginTests extends ApplicationManager {
 
     @Test
     public void loginNegativeTest_wrongPassword() {
-        User user = new User("lizkatest@mail.ru", "QwertY!23");
+        User user = new User("lizkatest@mail.ru", "Qwerty!23");
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
