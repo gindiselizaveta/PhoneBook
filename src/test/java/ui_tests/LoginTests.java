@@ -2,6 +2,7 @@ package ui_tests;
 
 import dto.User;
 import manager.ApplicationManager;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
@@ -13,6 +14,7 @@ public class LoginTests extends ApplicationManager {
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm("lizkatest@mail.ru", "wertY!23");
+        Assert.assertTrue(loginPage.isLoggedDisplayed());
     }
 
     @Test

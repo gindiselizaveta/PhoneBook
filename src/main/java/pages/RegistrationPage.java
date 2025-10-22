@@ -7,8 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class LoginPage extends BasePage {
-    public LoginPage(WebDriver driver) {
+public class RegistrationPage extends BasePage {
+
+    public RegistrationPage(WebDriver driver) {
         setDriver(driver);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
@@ -19,26 +20,27 @@ public class LoginPage extends BasePage {
     @FindBy(css = "input[name='password']")
     WebElement inputPassword;
 
-    @FindBy(css = "button[name='login']")
-    WebElement btnLoginForm;
+    @FindBy(css = "button[name='registration']")
+    WebElement btnRegistrationForm;
 
     @FindBy(css = "a[href='/contacts']")
-    WebElement pageLoggedSuccess;
+    WebElement regSuccess;
 
-    public void typeLoginForm(String email, String password) {
-        inputEmail.sendKeys(email);
-        inputPassword.sendKeys(password);
-        btnLoginForm.click();
-    }
+    @FindBy(css = "button[name='registration']")
+    WebElement regFailed;
 
-    public void typeLoginFormWithUser(User user) {
+    public void typeRegistrationForm(User user) {
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
-        btnLoginForm.click();
+        btnRegistrationForm.click();
     }
 
-    public boolean isLoggedDisplayed() {
-        return elementIsDisplayed(pageLoggedSuccess);
+    public boolean isRegDisplayed() {
+        return elementIsDisplayed(regSuccess);
+    }
+
+    public boolean regIsFailed() {
+        return elementIsDisplayed(regFailed);
     }
 
 }
