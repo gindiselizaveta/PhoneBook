@@ -16,16 +16,12 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(css = "input[name='email']")
     WebElement inputEmail;
-
     @FindBy(css = "input[name='password']")
     WebElement inputPassword;
-
     @FindBy(css = "button[name='registration']")
     WebElement btnRegistrationForm;
-
     @FindBy(css = "a[href='/contacts']")
     WebElement regSuccess;
-
     @FindBy(css = "button[name='registration']")
     WebElement regFailed;
 
