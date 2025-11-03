@@ -5,6 +5,7 @@ import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.AddPage;
 import pages.ContactsPage;
 import pages.HomePage;
@@ -17,6 +18,8 @@ import static pages.BasePage.*;
 import static utils.PropertiesReader.*;
 
 public class AddNewContactTests extends ApplicationManager {
+
+    SoftAssert softAssert = new SoftAssert();
 
     HomePage homePage;
     LoginPage loginPage;
@@ -45,7 +48,23 @@ public class AddNewContactTests extends ApplicationManager {
     public void addNewContactPositiveTestValidateList() {
         Contact contact = ContactFactory.positiveContact();
         addPage.typeContactForm(contact);
-        contactsPage.clickLastContact();
+        //contactsPage.clickLastContact();
         Assert.assertTrue(contactsPage.isContactPresent(contact));
+    }
+
+    @Test
+    public void addNewContactPositiveTest_ValidateElementSCROLL() {
+        Contact contact = ContactFactory.positiveContact();
+        addPage.typeContactForm(contact);
+        contactsPage.scrollToLastElList();
+        //contactsPage.scrollToLastElJS();
+        contactsPage.clickLastContact();
+        String text = contactsPage.getContactCardText();
+        softAssert.assertTrue(text.contains(contact.getName()));
+        softAssert.assertTrue(text.contains(contact.getLastname()));
+        softAssert.assertTrue(text.contains(contact.getPhone()));
+        softAssert.assertTrue(text.contains(contact.getEmail()));
+        softAssert.assertTrue(text.contains(contact.getAddress()));
+        softAssert.assertAll();
     }
 }

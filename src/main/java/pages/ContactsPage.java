@@ -1,8 +1,12 @@
 package pages;
 
 import dto.Contact;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -27,6 +31,12 @@ public class ContactsPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='contact-page_leftdiv__yhyke']/div/div[last()]/h2")
     WebElement lastElementList;
+
+    @FindBy(xpath = "//div[@class='contact-page_leftdiv__yhyke']/div")
+    WebElement divElList;
+
+    @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']")
+    WebElement itemDetailedCard;
 
     public boolean isTextContactsPresent(String text) {
         return isTextInElementPresent(btnContactsHeader, text);
@@ -55,5 +65,25 @@ public class ContactsPage extends BasePage {
 
     public void clickLastContact() {
         lastElementList.click();
+    }
+
+    public void scrollToLastElList() {
+        Actions actions = new Actions(driver);
+        //actions.scrollToElement(lastElementList).perform();//example 1
+        //int deltaY = driver.findElement(By.xpath("//div[@class='contact-page_leftdiv__yhyke']/div")).getSize().getHeight();//example 2
+        int deltaY = divElList.getSize().getHeight();
+        System.out.println("-->" + deltaY);
+        WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(contactsList.get(0));
+        pause(3);
+        actions.scrollFromOrigin(scrollOrigin, 0, deltaY).perform();
+    }
+
+    public void scrollToLastElJS() {
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+
+    public String getContactCardText() {
+        return itemDetailedCard.getText();
     }
 }
