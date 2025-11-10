@@ -10,6 +10,8 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.RegistrationPage;
 
+import java.lang.reflect.Method;
+
 import static utils.UserFactory.positiveUser;
 
 public class RegistrationTests extends ApplicationManager {
@@ -23,9 +25,14 @@ public class RegistrationTests extends ApplicationManager {
     }
 
     @Test
-    public void regPositiveTest() {
+    public void regPositiveTest(Method method) {
         User user = positiveUser();
+        logger.info("Start test " + method.getName() + "with data " + user);
+
         loginPage.typeRegForm(user);
+
+        logger.info("End test " + method.getName() + "with data " + user);
+
         Assert.assertTrue(new ContactsPage(getDriver()).isTextNoContactsPresent("No Contacts here!"));
     }
 
