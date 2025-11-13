@@ -1,10 +1,7 @@
 package pages;
 
 import dto.Contact;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput;
 import org.openqa.selenium.support.FindBy;
@@ -37,6 +34,25 @@ public class ContactsPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']")
     WebElement itemDetailedCard;
+
+    @FindBy(xpath = "//button[text()='Remove']")
+    WebElement btnRemove;
+    @FindBy(xpath = "//button[text()='Edit']")
+    WebElement btnEdit;
+    @FindBy(xpath = "//input[@placeholder='Name']")
+    WebElement inputName;
+    @FindBy(xpath = "//input[@placeholder='Last Name']")
+    WebElement inputLastName;
+    @FindBy(xpath = "//input[@placeholder='Phone']")
+    WebElement inputPhone;
+    @FindBy(xpath = "//input[@placeholder='email']")
+    WebElement inputEmail;
+    @FindBy(xpath = "//input[@placeholder='Address']")
+    WebElement inputAddress;
+    @FindBy(xpath = "//input[@placeholder='desc']")
+    WebElement inputDesc;
+    @FindBy(xpath = "//button[text()='Save']")
+    WebElement btnSave;
 
     public boolean isTextContactsPresent(String text) {
         return isTextInElementPresent(btnContactsHeader, text);
@@ -85,5 +101,28 @@ public class ContactsPage extends BasePage {
 
     public String getContactCardText() {
         return itemDetailedCard.getText();
+    }
+
+    public void deleteFirstContact() {
+        contactsList.get(0).click();
+        btnRemove.click();
+    }
+
+    public void typeEditForm(Contact contact) {
+        contactsList.get(0).click();
+        btnEdit.click();
+        inputName.clear();
+        inputName.sendKeys(contact.getName());
+        inputLastName.clear();
+        inputLastName.sendKeys(contact.getLastname());
+        inputPhone.clear();
+        inputPhone.sendKeys(contact.getPhone());
+        inputEmail.clear();
+        inputEmail.sendKeys(contact.getEmail());
+        inputAddress.sendKeys(Keys.chord(Keys.COMMAND, "A"));
+        inputAddress.sendKeys(contact.getAddress());
+//        inputDesc.clear();
+//        inputDesc.sendKeys(contact.getDescription());
+        btnSave.click();
     }
 }

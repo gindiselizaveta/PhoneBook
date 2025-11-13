@@ -1,5 +1,6 @@
 package ui_tests;
 
+import data_providers.ContactDP;
 import dto.Contact;
 import manager.ApplicationManager;
 import org.testng.Assert;
@@ -43,6 +44,13 @@ public class AddNewContactTests extends ApplicationManager {
     @Test
     public void addNewContactPos() {
         addPage.typeContactForm(ContactFactory.positiveContact());
+        int numberOfContactsAfterAdd = contactsPage.getNumberOfContacts();
+        Assert.assertEquals(numberOfContactsAfterAdd, numberOfContacts + 1);
+    }
+
+    @Test(dataProvider = "dataProviderContactFile", dataProviderClass = ContactDP.class)
+    public void addNewContactPosDataProvider(Contact contact) {
+        addPage.typeContactForm(contact);
         int numberOfContactsAfterAdd = contactsPage.getNumberOfContacts();
         Assert.assertEquals(numberOfContactsAfterAdd, numberOfContacts + 1);
     }

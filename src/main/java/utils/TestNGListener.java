@@ -1,5 +1,7 @@
 package utils;
 
+import manager.ApplicationManager;
+import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
