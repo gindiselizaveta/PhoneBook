@@ -4,16 +4,19 @@ import dto.User;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.ContactsPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.RegistrationPage;
+import utils.TestNGListener;
 
 import java.lang.reflect.Method;
 
 import static utils.UserFactory.positiveUser;
 
+@Listeners(TestNGListener.class)
 public class RegistrationTests extends ApplicationManager {
 
     LoginPage loginPage;

@@ -4,6 +4,7 @@ import dto.Contact;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.AddPage;
@@ -13,10 +14,12 @@ import pages.LoginPage;
 import utils.ContactFactory;
 import utils.HeaderMenuItem;
 import utils.PropertiesReader;
+import utils.TestNGListener;
 
 import static pages.BasePage.*;
 import static utils.PropertiesReader.*;
 
+@Listeners(TestNGListener.class)
 public class AddNewContactTests extends ApplicationManager {
 
     SoftAssert softAssert = new SoftAssert();
