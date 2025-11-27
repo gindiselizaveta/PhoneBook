@@ -1,0 +1,12 @@
+cd /Users/elizavetagindis/IdeaProjects/QA_49/Auto/QA_49_Phonebook
+
+./gradlew clean smoke_tests  run group smoke test
+./gradlew clean smoke_contact_tests   run group smoke WO user group
+
+./gradlew clean -Dsuite=negative_tests different_tests
+./gradlew clean different_tests -Dsuite=negative_tests
+
+./gradlew clean browser_tests -Pbrowser=safari
+./gradlew clean browser_tests -Pbrowser=firefox
+./gradlew clean browser_tests -Pbrowser=chrome  headless run
+

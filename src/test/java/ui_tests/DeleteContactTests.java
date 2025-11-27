@@ -22,7 +22,7 @@ public class DeleteContactTests extends ApplicationManager {
     AddPage addPage;
     int numberOfContacts;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() throws IllegalAccessException {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
@@ -31,7 +31,7 @@ public class DeleteContactTests extends ApplicationManager {
         numberOfContacts = contactsPage.getNumberOfContacts();
     }
 
-    @Test
+    @Test(groups = {"smoke", "contact"})
     public void deleteFirstContactPosTest() {
         contactsPage.deleteFirstContact();
         pause(3);

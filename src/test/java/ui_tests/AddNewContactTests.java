@@ -14,7 +14,6 @@ import pages.HomePage;
 import pages.LoginPage;
 import utils.ContactFactory;
 import utils.HeaderMenuItem;
-import utils.PropertiesReader;
 import utils.TestNGListener;
 
 import static pages.BasePage.*;
@@ -31,7 +30,7 @@ public class AddNewContactTests extends ApplicationManager {
     AddPage addPage;
     int numberOfContacts;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() throws IllegalAccessException {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
@@ -41,7 +40,7 @@ public class AddNewContactTests extends ApplicationManager {
         addPage = clickButtonHeader(HeaderMenuItem.ADD);
     }
 
-    @Test
+    @Test(groups = {"smoke", "contact"})
     public void addNewContactPos() {
         addPage.typeContactForm(ContactFactory.positiveContact());
         int numberOfContactsAfterAdd = contactsPage.getNumberOfContacts();
